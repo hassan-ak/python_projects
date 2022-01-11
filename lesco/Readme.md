@@ -6,3 +6,7 @@
 
 1. pdfkit using `pip install pdfkit`
 2. wkhtmltopdf
+
+## Merge Pdf
+
+1. PyPDF2 using `pip install PyPDF2`
