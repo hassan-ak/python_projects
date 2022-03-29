@@ -5,7 +5,9 @@
 
 
 ### Imports ###
-import urllib.request, urllib.parse, urllib.error
+import urllib.request
+import urllib.parse
+import urllib.error
 from bs4 import BeautifulSoup
 import ssl
 import docx
@@ -36,8 +38,8 @@ while e_m_mode == 0:
                     R.append(rn)
                     check_R_m = 1
                 else:
-                    continue        
-        if entry_mode.upper() == "C":            
+                    continue
+        if entry_mode.upper() == "C":
             check_R_c = 0
             while check_R_c == 0:
                 csv_file_name = input("Enter CSV file name: ")
@@ -49,9 +51,10 @@ while e_m_mode == 0:
                     if len(R) >= 1:
                         check_R_c = 1
                     else:
-                        print("Entered file contains no entry, Kindly Enter valid file name.")
+                        print(
+                            "Entered file contains no entry, Kindly Enter valid file name.")
                 except:
-                    check_R_c = 0            
+                    check_R_c = 0
         e_m_mode = 1
     else:
         print("Kindly enter 'M' or 'C'")
@@ -191,14 +194,14 @@ for elem_R in R_ok:
                     continue
                 else:
                     n = n+1
-                    if n >= d and n<=e:
+                    if n >= d and n <= e:
                         if a[0:3].upper() in ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]:
                             months.append(a)
                             f = n
                         if n == f+1:
                             mdis.append(a)
             except:
-                continue                
+                continue
         months.append(current_month)
         mdis.append(str(c_mdi_f))
 
@@ -206,35 +209,35 @@ for elem_R in R_ok:
         months_final = list()
         for elem in months:
             if elem[0:3] == "JAN":
-                months_final.append(elem.replace("JAN","01/20"))
+                months_final.append(elem.replace("JAN", "01/20"))
             if elem[0:3] == "FEB":
-                months_final.append(elem.replace("FEB","02/20"))
+                months_final.append(elem.replace("FEB", "02/20"))
             if elem[0:3] == "MAR":
-                months_final.append(elem.replace("MAR","03/20"))
+                months_final.append(elem.replace("MAR", "03/20"))
             if elem[0:3] == "APR":
-                months_final.append(elem.replace("APR","04/20"))
+                months_final.append(elem.replace("APR", "04/20"))
             if elem[0:3] == "MAY":
-                months_final.append(elem.replace("MAY","05/20"))
+                months_final.append(elem.replace("MAY", "05/20"))
             if elem[0:3] == "JUN":
-                months_final.append(elem.replace("JUN","06/20"))
+                months_final.append(elem.replace("JUN", "06/20"))
             if elem[0:3] == "JUL":
-                months_final.append(elem.replace("JUL","07/20"))
+                months_final.append(elem.replace("JUL", "07/20"))
             if elem[0:3] == "AUG":
-                months_final.append(elem.replace("AUG","08/20"))
+                months_final.append(elem.replace("AUG", "08/20"))
             if elem[0:3] == "SEP":
-                months_final.append(elem.replace("SEP","09/20"))
+                months_final.append(elem.replace("SEP", "09/20"))
             if elem[0:3] == "OCT":
-                months_final.append(elem.replace("OCT","10/20"))
+                months_final.append(elem.replace("OCT", "10/20"))
             if elem[0:3] == "NOV":
-                months_final.append(elem.replace("NOV","11/20"))
+                months_final.append(elem.replace("NOV", "11/20"))
             if elem[0:3] == "DEC":
-                months_final.append(elem.replace("DEC","12/20"))
+                months_final.append(elem.replace("DEC", "12/20"))
         sorting_temp = None
         list_1 = list()
         list_2 = list()
         mm1 = dict()
         mm2 = dict()
-        for elem in range(0,len(months_final)):
+        for elem in range(0, len(months_final)):
             while sorting_temp is None:
                 sorting_temp = months_final[elem][5:]
             if months_final[elem][5:] == sorting_temp:
@@ -242,12 +245,12 @@ for elem_R in R_ok:
             else:
                 list_2.append(elem)
         for elem in list_1:
-                mm1[months_final[elem]] = mdis[elem]
+            mm1[months_final[elem]] = mdis[elem]
         for elem in list_2:
             mm2[months_final[elem]] = mdis[elem]
-        mm1=(sorted(mm1.items()))
-        mm2=(sorted(mm2.items()))
-        mm3=list()
+        mm1 = (sorted(mm1.items()))
+        mm2 = (sorted(mm2.items()))
+        mm3 = list()
         for elem in mm1:
             mm3.append(elem)
         for elem in mm2:
@@ -269,14 +272,15 @@ for elem_R in R_ok:
         print(f"Reference No. : {reference_no}")
         print(f"Name : {name}")
         print(f"Address : {address}")
-        print(f"Current Month : {current_month}  ----------  Sanctioned Load : {sanc_load}-KW  ----------  Current MDI : {c_mdi_f}-KW")
+        print(
+            f"Current Month : {current_month}  ----------  Sanctioned Load : {sanc_load}-KW  ----------  Current MDI : {c_mdi_f}-KW")
         print("Months and MDI record")
         for elem in months_mdi:
             print(elem)
         print("Excess MDI and Month Record")
         for elem in excess_mdi_month:
             print(elem)
-            
+
         ###Open Docx.###
         document = docx.Document()
 
@@ -298,10 +302,12 @@ for elem_R in R_ok:
         font.size = Pt(12)
 
         ### ADD header ###
-        document.add_picture("11221-head.jpg", width = docx.shared.Cm(18), height = docx.shared.Cm(2.5)) 
+        document.add_picture(
+            "11221-head.jpg", width=docx.shared.Cm(18), height=docx.shared.Cm(2.5))
 
         ### Memo No. and Date ###
-        paragraph = document.add_paragraph("Memo No. __________                                                                                              Dated ____/____/2022.")
+        paragraph = document.add_paragraph(
+            "Memo No. __________                                                                                              Dated ____/____/2022.")
         paragraph = document.add_paragraph("")
 
         ### Recievers ###
@@ -330,7 +336,7 @@ for elem_R in R_ok:
         runner.underline = True
         paragraph = document.add_paragraph("")
 
-        ### Creating string of Months and Mdi's
+        # Creating string of Months and Mdi's
         months = list()
         mdis = list()
         for elem in excess_mdi_month:
@@ -343,7 +349,7 @@ for elem_R in R_ok:
                 m = month
                 count += 1
             else:
-                if len(months) >=1:
+                if len(months) >= 1:
                     if count <= len(months)-1:
                         m += f", {month}"
                         count += 1
@@ -356,7 +362,7 @@ for elem_R in R_ok:
                 n = mdi
                 count += 1
             else:
-                if len(mdis) >=1:
+                if len(mdis) >= 1:
                     if count <= len(mdis)-1:
                         n += f", {mdi}"
                         count += 1
@@ -366,30 +372,34 @@ for elem_R in R_ok:
         mdi = n
 
         ### Body ##
-        paragraph = document.add_paragraph(f"\tIt is informed that your premises were checked and after consulting the office record it is found that you used MDI of {mdi}-KW during {months} respectively which exceeds your sanctioned load of {sanc_load}-KW.")
+        paragraph = document.add_paragraph(
+            f"\tIt is informed that your premises were checked and after consulting the office record it is found that you used MDI of {mdi}-KW during {months} respectively which exceeds your sanctioned load of {sanc_load}-KW.")
         paragraph.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
         #
-        paragraph = document.add_paragraph("\tYou are therefore advised to coordinate with this office for assessment of the loss sustained to the company due to said discrepancy under section-26 of Elect: Act-1910 as amended within 07-days.")
+        paragraph = document.add_paragraph(
+            "\tYou are therefore advised to coordinate with this office for assessment of the loss sustained to the company due to said discrepancy under section-26 of Elect: Act-1910 as amended within 07-days.")
         paragraph.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
         #
-        paragraph = document.add_paragraph("\tIn case of non-representation from your end within stipulated period, Ex-part action will be taken and also further action under section-24 of Elec: Act 1910 will be initiated for disconnection of supply at premises.")
+        paragraph = document.add_paragraph(
+            "\tIn case of non-representation from your end within stipulated period, Ex-part action will be taken and also further action under section-24 of Elec: Act 1910 will be initiated for disconnection of supply at premises.")
         paragraph.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
 
         ### Footer ###
         paragraph = document.add_paragraph("")
         paragraph = document.add_paragraph("")
-        off = "Addl. EXECUTIVE ENGINEER"
+        # off = "Addl. EXECUTIVE ENGINEER"
+        off = "SUB DIVISIONAL OFFICER"
         paragraph = document.add_paragraph()
         paragraph.paragraph_format.space_after = Pt(0)
         runner = paragraph.add_run(off)
         runner.bold = True
-        paragraph.paragraph_format.left_indent = Inches(4.4)
+        # paragraph.paragraph_format.left_indent = Inches(4.4)
+        paragraph.paragraph_format.left_indent = Inches(4.6)
         sub = "ALI RAZA ABAD SUB DIVISION LESCO"
         paragraph = document.add_paragraph()
         paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
         runner = paragraph.add_run(sub)
         runner.bold = True
-
 
         ### CC##
         paragraph = document.add_paragraph("")
@@ -401,52 +411,51 @@ for elem_R in R_ok:
         if len(mdi) > 0:
             document.save(f"{filename}.docx")
             print(f"{filename}.docx Created")
-            filecount +=1
+            filecount += 1
         else:
             print("Re-run the Programme With new Reference No.")
-        
+
         print("**********************************************************************************************")
         print("**********************************************************************************************")
         print("**********************************************************************************************")
         print("**********************************************************************************************")
         print("**********************************************************************************************")
-    
+
     except:
         reference_number_causing_errors.append(reference_no)
 
-        
+
 print("**********************************************************************************************")
 print("**********************************************************************************************")
 print("**********************************************************************************************")
 print("**********************************************************************************************")
-print("**********************************************************************************************")       
 print("**********************************************************************************************")
 print("**********************************************************************************************")
 print("**********************************************************************************************")
 print("**********************************************************************************************")
-print("**********************************************************************************************") 
 print("**********************************************************************************************")
 print("**********************************************************************************************")
 print("**********************************************************************************************")
 print("**********************************************************************************************")
-print("**********************************************************************************************") 
+print("**********************************************************************************************")
+print("**********************************************************************************************")
+print("**********************************************************************************************")
 
 print(" ")
 print(f"Total reference nos. entered or in file : {len(R)}")
-print(f"Total Number of records processed : {executioncount}")      
-print(f"Number of files created : {filecount}") 
+print(f"Total Number of records processed : {executioncount}")
+print(f"Number of files created : {filecount}")
 if len(R_error) > 0:
     n = 1
     print(" ")
     print("Following Reference Nos. in the CSV are invalid kindly re-check them manually")
     for elem in R_error:
-        print (f"{n} --- {elem}")
+        print(f"{n} --- {elem}")
         n += 1
 if len(reference_number_causing_errors) > 0:
     n = 1
     print(" ")
     print("Following Reference Nos. are generating no result kindly re-check them manually")
     for elem in reference_number_causing_errors:
-        print (f"{n} --- {elem}")
+        print(f"{n} --- {elem}")
         n += 1
-
