@@ -5,7 +5,9 @@
 
 
 ### Imports ###
-import urllib.request, urllib.parse, urllib.error
+import urllib.request
+import urllib.parse
+import urllib.error
 from bs4 import BeautifulSoup
 import ssl
 import docx
@@ -36,8 +38,8 @@ while e_m_mode == 0:
                     R.append(rn)
                     check_R_m = 1
                 else:
-                    continue        
-        if entry_mode.upper() == "C":            
+                    continue
+        if entry_mode.upper() == "C":
             check_R_c = 0
             while check_R_c == 0:
                 csv_file_name = input("Enter CSV file name: ")
@@ -49,9 +51,10 @@ while e_m_mode == 0:
                     if len(R) >= 1:
                         check_R_c = 1
                     else:
-                        print("Entered file contains no entry, Kindly Enter valid file name.")
+                        print(
+                            "Entered file contains no entry, Kindly Enter valid file name.")
                 except:
-                    check_R_c = 0            
+                    check_R_c = 0
         e_m_mode = 1
     else:
         print("Kindly enter 'M' or 'C'")
@@ -133,7 +136,7 @@ for elem_R in R_ok:
         print(f"***   Reference No. : {reference_no1}")
         print(f"***   Name : {name}")
         print(f"***   Address : {address}")
-            
+
         ###Open Docx.###
         document = docx.Document()
 
@@ -155,10 +158,12 @@ for elem_R in R_ok:
         font.size = Pt(12)
 
         ### ADD header ###
-        document.add_picture("11221-head.jpg", width = docx.shared.Cm(18), height = docx.shared.Cm(2.5)) 
+        document.add_picture(
+            "11221-head.jpg", width=docx.shared.Cm(18), height=docx.shared.Cm(2.5))
 
         ### Memo No. and Date ###
-        paragraph = document.add_paragraph("Memo No. __________                                                                                              Dated ____/____/2022.")
+        paragraph = document.add_paragraph(
+            "Memo No. __________                                                                                              Dated ____/____/2022.")
         paragraph = document.add_paragraph("")
 
         ### Recievers ###
@@ -188,30 +193,34 @@ for elem_R in R_ok:
         paragraph = document.add_paragraph("")
 
         ### Body ##
-        paragraph = document.add_paragraph(f"\tIt is informed that your premises were checked ")
+        paragraph = document.add_paragraph(
+            f"\tIt is informed that your premises were checked ")
         paragraph.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
         #
-        paragraph = document.add_paragraph("\tYou are therefore advised to coordinate with this office for assessment of the loss sustained to the company due to said discrepancy under section-26 of Elect: Act-1910 as amended within 07-days.")
+        paragraph = document.add_paragraph(
+            "\tYou are therefore advised to coordinate with this office for assessment of the loss sustained to the company due to said discrepancy under section-26 of Elect: Act-1910 as amended within 07-days.")
         paragraph.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
         #
-        paragraph = document.add_paragraph("\tIn case of non-representation from your end within stipulated period, Ex-part action will be taken and also further action under section-24 of Elec: Act 1910 will be initiated for disconnection of supply at premises.")
+        paragraph = document.add_paragraph(
+            "\tIn case of non-representation from your end within stipulated period, Ex-part action will be taken and also further action under section-24 of Elec: Act 1910 will be initiated for disconnection of supply at premises.")
         paragraph.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
 
         ### Footer ###
         paragraph = document.add_paragraph("")
         paragraph = document.add_paragraph("")
-        off = "Addl. EXECUTIVE ENGINEER"
+        # off = "Addl. EXECUTIVE ENGINEER"
+        off = "SUB DIVISIONAL OFFICER"
         paragraph = document.add_paragraph()
         paragraph.paragraph_format.space_after = Pt(0)
         runner = paragraph.add_run(off)
         runner.bold = True
-        paragraph.paragraph_format.left_indent = Inches(4.4)
+        # paragraph.paragraph_format.left_indent = Inches(4.4)
+        paragraph.paragraph_format.left_indent = Inches(4.6)
         sub = "ALI RAZA ABAD SUB DIVISION LESCO"
         paragraph = document.add_paragraph()
         paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
         runner = paragraph.add_run(sub)
         runner.bold = True
-
 
         ### CC##
         paragraph = document.add_paragraph("")
@@ -220,11 +229,11 @@ for elem_R in R_ok:
         paragraph = document.add_paragraph("\tMaster file.")
 
         ### Saving File ###
-        if reference_no1 != 0 :
+        if reference_no1 != 0:
             document.save(f"{filename}.docx")
             print(f"***   {filename}.docx Created")
-            filecount +=1
-        else :
+            filecount += 1
+        else:
             reference_number_giving_no_result.append(reference_no)
         print("***                                                                                        ***")
         print("**********************************************************************************************")
@@ -233,34 +242,33 @@ for elem_R in R_ok:
     except:
         reference_number_causing_errors.append(reference_no)
 
-        
+
 print("----------------------------------------------------------------------------------------------")
 print("----------------------------------------------------------------------------------------------")
 print("----------------------------------------------------------------------------------------------")
 
 print(" ")
 print(f"Total reference nos. entered or in file : {len(R)}")
-print(f"Total Number of records processed : {executioncount}")      
-print(f"Number of files created : {filecount}") 
+print(f"Total Number of records processed : {executioncount}")
+print(f"Number of files created : {filecount}")
 if len(R_error) > 0:
     n = 1
     print(" ")
     print("Following Reference Nos. in the CSV are invalid kindly re-check them manually")
     for elem in R_error:
-        print (f"{n} --- {elem}")
+        print(f"{n} --- {elem}")
         n += 1
 if len(reference_number_causing_errors) > 0:
     n = 1
     print(" ")
     print("Following Reference Nos. are generating no result kindly re-check them manually")
     for elem in reference_number_causing_errors:
-        print (f"{n} --- {elem}")
+        print(f"{n} --- {elem}")
         n += 1
 if len(reference_number_giving_no_result) > 0:
     n = 1
     print(" ")
     print("Following Reference Nos. are generating no result kindly re-check them manually")
     for elem in reference_number_giving_no_result:
-        print (f"{n} --- {elem}")
+        print(f"{n} --- {elem}")
         n += 1
-
